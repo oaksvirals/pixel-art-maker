@@ -17,54 +17,72 @@ const pixelContainer = document.createElement('div');
 pixelContainer.className = 'pixelContainer';
 
 // Pixel Box
-let rowSize = 50;
+let rowSize = 16;
 let containerSize = 960;
 let pixelWidthHeight = '';
 let pixelBoxSizing = '';
+let pixelColor = 'black';
 
 const createPixels = (num) => {
 
-    // start fresh for any new container
-    pixelContainer.remove();
-    outerContainer.appendChild(pixelContainer);
+    function creationEvent() {
+        // start fresh for any new container
+        pixelContainer.remove();
+        outerContainer.appendChild(pixelContainer);
 
-    // adjust container size if boxes do not fit
-    if (containerSize % rowSize > 0) {
-        let sizing = containerSize / rowSize;
-        let adjustment = Math.round(sizing);
+        // adjust container size if boxes do not fit
+        if (containerSize % rowSize > 0) {
+            let sizing = containerSize / rowSize;
+            let adjustment = Math.round(sizing);
 
-        containerSize = rowSize * adjustment;
+            containerSize = rowSize * adjustment;
 
-        pixelBoxSizing = containerSize + 'px';
+            pixelBoxSizing = containerSize + 'px';
 
-        pixelContainer.style.maxWidth = pixelBoxSizing;
-        pixelContainer.style.maxHeight = pixelBoxSizing;
+            pixelContainer.style.maxWidth = pixelBoxSizing;
+            pixelContainer.style.maxHeight = pixelBoxSizing;
+        };
+
+        // create inner boxes "pixels"
+        pixelWidthHeight = containerSize / rowSize + 'px';
+
+        for (let i = 0; i < num; i++) {
+            const pixelBox = document.createElement('div');
+
+            pixelContainer.appendChild(pixelBox);
+            pixelBox.style.width = pixelWidthHeight;
+            pixelBox.style.height = pixelWidthHeight;
+            pixelBox.className = 'pixelBox';
+            pixelBox.backgroundColor = 'white';
+
+            // hover effects
+            pixelBox.addEventListener('mouseenter', () => {
+                pixelBox.style.backgroundColor = pixelColor;
+            });
+        };
     };
 
-    // create inner boxes "pixels"
-    pixelWidthHeight = containerSize / rowSize + 'px';
-
-    for (let i = 0; i < num; i++) {
-        const pixelBox = document.createElement('div');
-
-        pixelContainer.appendChild(pixelBox);
-        pixelBox.style.width = pixelWidthHeight;
-        pixelBox.style.height = pixelWidthHeight;
-        pixelBox.className = 'pixelBox';
-
-        // hover effects
-        pixelBox.addEventListener('mouseenter', () => {
-            pixelBox.style.backgroundColor = 'black';
-        });
-    };
+    creationEvent()
 };
 
 // create initial box at beginning
 createPixels(rowSize * rowSize);
 
-// menu bar buttons
-const trashButton = document.querySelector('.trash');
+// dropper color picker
+const dropper = document.querySelector('.dropper');
+const colorPicker = document.querySelector('#colorPicker');
 
-trashButton.addEventListener('onclick', () => {
-    alert('working')
+dropper.addEventListener('click', () => {
+    colorPicker.click();
 });
+
+colorPicker.addEventListener('input', () => {
+    pixelColor = colorPicker.value;
+});
+
+// eraser
+const eraser = document.querySelector('.eraser');
+
+eraser.addEventListener('click', () => {
+    pixelColor = 'white';
+})

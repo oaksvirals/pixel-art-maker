@@ -23,6 +23,13 @@
     gap: 10px;
 }
 
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 .menuBar {
     border: 2px solid var(--darkMode3);
     border-radius: 8px;
@@ -40,11 +47,8 @@
     transform: scale(0.90);
 }
 
-.slider {
-    margin: 5px;
-    margin-left: 25px;
-    margin-right: 25px;
-    background: var(--darkMode3);
+#colorPicker {
+    display: none;
 }
 
 

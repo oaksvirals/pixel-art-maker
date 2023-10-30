@@ -11,6 +11,11 @@
     <!-- header area -->
     <div class="header">
         <h1>Pixel Art Maker</h1>
+        <div class="sliderContainer">
+            <p>Grid Size:</p>
+            <span id="rangeValue">0</span>
+            <input type="range" min="16" max="100" value="16" class="slider">
+        </div>
         <div class="menuBar">
             <img class="paintBrush" src="./images/paint-brush.png" alt="" width="42">
             <img class="paintBucket" src="./images/paint-bucket.png" alt="" width="42">
@@ -18,6 +23,7 @@
             <img class="eraser" src="./images/eraser.png" alt="" width="42">
             <img class="undo" src="./images/undo.png" alt="" width="42">
             <img class="trash" src="./images/trash.png" alt="" width="42">
+            <input type="color" name="" id="colorPicker">
         </div>
     </div>
     <!-- center pixel box area -->
