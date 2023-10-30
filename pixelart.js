@@ -11,4 +11,44 @@
     R) you should be able to enter 64 and have a brand new 64x64 grid pop up without changing the total amount of pixels used
 */
 
-const pixelContainer = document.querySelector('.pixelContainer');
+// Setup for grabbing initial containers, creating pixel box container, and applying css
+const outerContainer = document.querySelector('.outerContainer');
+const pixelContainer = document.createElement('div');
+pixelContainer.className = 'pixelContainer';
+outerContainer.appendChild(pixelContainer);
+
+// Pixel Box
+let rowSize = 40;
+let containerSize = 960;
+let pixelWidthHeight = '';
+let pixelBoxSizing = '';
+
+const createPixels = (num) => {
+
+    // adjust container size if boxes do not fit
+    if (containerSize % rowSize > 0) {
+        let sizing = containerSize / rowSize;
+        let adjustment = Math.round(sizing);
+
+        containerSize = rowSize * adjustment;
+
+        pixelBoxSizing = containerSize + 'px';
+
+        pixelContainer.style.maxWidth = pixelBoxSizing;
+        pixelContainer.style.maxHeight = pixelBoxSizing;
+    };
+
+    // create inner boxes "pixels"
+    pixelWidthHeight = containerSize / rowSize + 'px';
+
+    for (let i = 0; i < num; i++) {
+        const pixelBox = document.createElement('div');
+
+        pixelContainer.appendChild(pixelBox);
+        pixelBox.style.width = pixelWidthHeight;
+        pixelBox.style.height = pixelWidthHeight;
+        pixelBox.className = 'pixelBox';
+    };
+};
+
+createPixels(rowSize * rowSize);
