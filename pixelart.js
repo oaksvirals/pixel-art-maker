@@ -12,13 +12,13 @@
 */
 
 // Setup for grabbing initial containers, creating pixel box container, and applying css
-const outerContainer = document.querySelector('.outerContainer');
+const outerContainer = document.querySelector('.centerContainer');
 const pixelContainer = document.createElement('div');
 pixelContainer.className = 'pixelContainer';
 outerContainer.appendChild(pixelContainer);
 
 // Pixel Box
-let rowSize = 40;
+let rowSize = 50;
 let containerSize = 960;
 let pixelWidthHeight = '';
 let pixelBoxSizing = '';

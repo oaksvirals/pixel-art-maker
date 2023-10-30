@@ -4,9 +4,22 @@
     margin: 0;
 }
 
-.outerContainer {
-    border: 2px solid red;
+/* header */
+.header {
+    text-align: center;
+}
+
+
+/* pixel box area */
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 50px;
+}
+
+.centerContainer {
+    border: 1px solid gray;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,5 +33,17 @@
 }
 
 .pixelBox {
-    border: 1px solid black;
+    border: 1px solid gray;
+}
+
+/* footer area */
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.footer {
+    background-color: black;
+    padding: 50px;
 }
