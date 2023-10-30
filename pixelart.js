@@ -15,7 +15,6 @@
 const outerContainer = document.querySelector('.centerContainer');
 const pixelContainer = document.createElement('div');
 pixelContainer.className = 'pixelContainer';
-outerContainer.appendChild(pixelContainer);
 
 // Pixel Box
 let rowSize = 50;
@@ -24,6 +23,10 @@ let pixelWidthHeight = '';
 let pixelBoxSizing = '';
 
 const createPixels = (num) => {
+
+    // start fresh for any new container
+    pixelContainer.remove();
+    outerContainer.appendChild(pixelContainer);
 
     // adjust container size if boxes do not fit
     if (containerSize % rowSize > 0) {
@@ -48,7 +51,20 @@ const createPixels = (num) => {
         pixelBox.style.width = pixelWidthHeight;
         pixelBox.style.height = pixelWidthHeight;
         pixelBox.className = 'pixelBox';
+
+        // hover effects
+        pixelBox.addEventListener('mouseenter', () => {
+            pixelBox.style.backgroundColor = 'black';
+        });
     };
 };
 
+// create initial box at beginning
 createPixels(rowSize * rowSize);
+
+// menu bar buttons
+const trashButton = document.querySelector('.trash');
+
+trashButton.addEventListener('onclick', () => {
+    alert('working')
+});
