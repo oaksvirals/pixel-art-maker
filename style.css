@@ -48,7 +48,11 @@
 }
 
 #colorPicker {
-    display: none;
+    width: 0;
+    height: 0;
+    position: relative;
+    right: 345px;
+    bottom: 25px;
 }
 
 
