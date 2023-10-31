@@ -69,6 +69,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-basis: 3;
+    margin: 5px;
 }
 
 .pixelContainer {
@@ -86,6 +88,5 @@
 }
 
 .footer {
-    background-color: var(--darkMode1);
     padding: 50px;
 }

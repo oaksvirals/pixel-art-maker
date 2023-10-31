@@ -34,6 +34,7 @@ let pixelWidthHeight = '';
 let pixelBoxSizing = '';
 let pixelColor = 'black';
 let defaultColor = 'white';
+let mouseDown = false;
 
 const createPixels = (num) => {
 
@@ -70,11 +71,13 @@ const createPixels = (num) => {
         pixelBox.style.backgroundColor = defaultColor;
     
         // event listeners
-            // pixelBox.addEventListener('mouseover', () => {
-            //     pixelBox.style.backgroundColor = pixelColor;
-            // });
-            pixelBox.addEventListener('mouseover', () => colorSquare(pixelBox, pixelColor)); // Change color on hover
+            // pixelBox.addEventListener('mousedown', () => colorSquare(pixelBox, pixelColor)); // Change color on hover
             pixelBox.addEventListener('click', () => colorSquare(pixelBox, pixelColor)); // Change color on click
+            pixelBox.addEventListener('mouseover', () => {
+                if (mouseDown) {
+                    colorSquare(pixelBox, pixelColor);
+                }
+            });
         };
 };
 
@@ -90,8 +93,11 @@ slider.addEventListener('input', () => {
 });
 
 slider.addEventListener('mouseup', () => {
+    const pixelContainer = document.querySelector('.pixelContainer');
+    pixelContainer.remove();
     rowSize = slider.value;
-    centerContainer.innerHTML = '';
+    containerSize = 960;
+    defaultColor = 'white';
     createPixels(rowSize * rowSize);
 });
 
