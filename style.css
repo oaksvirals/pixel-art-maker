@@ -78,10 +78,6 @@
     max-height: 960px;
 }
 
-.pixelBox {
-    border: 1px solid gray;
-}
-
 /* footer area */
 .footerContainer {
     display: flex;

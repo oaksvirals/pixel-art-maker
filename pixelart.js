@@ -17,6 +17,16 @@ const leftContainer = document.querySelector('.leftContainer');
 const centerContainer = document.querySelector('.centerContainer');
 const rightContainer = document.querySelector('.rightContainer');
 
+// tracking
+let history = [];
+
+function colorSquare(square, color) {
+    let originalColor = square.style.backgroundColor;
+    square.style.backgroundColor = color;
+
+    history.push({ square: square, previousColor: originalColor });
+};
+
 // Pixel Box
 let rowSize = 16;
 let containerSize = 960;
@@ -55,13 +65,16 @@ const createPixels = (num) => {
         pixelContainer.appendChild(pixelBox);
         pixelBox.style.width = pixelWidthHeight;
         pixelBox.style.height = pixelWidthHeight;
-        pixelBox.className = 'pixelBox'
+        pixelBox.className = 'pixelBox' + i;
+        pixelBox.style.border = '1px solid gray'
         pixelBox.style.backgroundColor = defaultColor;
     
-        // hover effects
-            pixelBox.addEventListener('mouseenter', () => {
-                pixelBox.style.backgroundColor = pixelColor;
-            });
+        // event listeners
+            // pixelBox.addEventListener('mouseover', () => {
+            //     pixelBox.style.backgroundColor = pixelColor;
+            // });
+            pixelBox.addEventListener('mouseover', () => colorSquare(pixelBox, pixelColor)); // Change color on hover
+            pixelBox.addEventListener('click', () => colorSquare(pixelBox, pixelColor)); // Change color on click
         };
 };
 
@@ -85,6 +98,10 @@ slider.addEventListener('mouseup', () => {
 // menu
 // paint brush
 const paintBrush = document.querySelector('.paintBrush');
+
+paintBrush.addEventListener('click', () => {
+    pixelColor = colorPicker.value;
+})
 
 paintBrush.addEventListener('mouseenter', () => {
     paintBrush.src = './images/paint-brush-active.png';
@@ -152,7 +169,10 @@ eraser.addEventListener('mouseleave', () => {
 const undo = document.querySelector('.undo');
 
 undo.addEventListener('click', () => {
-    undo = 'white';
+    let lastAction = history.pop();
+    if (lastAction) {
+        lastAction.square.style.backgroundColor = lastAction.previousColor;
+    }
 });
 
 undo.addEventListener('mouseenter', () => {
