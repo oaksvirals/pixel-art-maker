@@ -12,7 +12,10 @@
 */
 
 // Setup for grabbing initial containers, creating pixel box container, and applying css
-const outerContainer = document.querySelector('.centerContainer');
+const outerContainer = document.querySelector('.container');
+const leftContainer = document.querySelector('.leftContainer');
+const centerContainer = document.querySelector('.centerContainer');
+const rightContainer = document.querySelector('.rightContainer');
 
 // Pixel Box
 let rowSize = 16;
@@ -20,6 +23,7 @@ let containerSize = 960;
 let pixelWidthHeight = '';
 let pixelBoxSizing = '';
 let pixelColor = 'black';
+let defaultColor = 'white';
 
 const createPixels = (num) => {
 
@@ -27,7 +31,7 @@ const createPixels = (num) => {
     pixelContainer.className = 'pixelContainer';
 
     // start fresh for any new container
-    outerContainer.appendChild(pixelContainer);
+    centerContainer.appendChild(pixelContainer);
     
     // adjust container size if boxes do not fit
     if (containerSize % rowSize > 0) {
@@ -51,8 +55,8 @@ const createPixels = (num) => {
         pixelContainer.appendChild(pixelBox);
         pixelBox.style.width = pixelWidthHeight;
         pixelBox.style.height = pixelWidthHeight;
-        pixelBox.className = 'pixelBox';
-        pixelBox.backgroundColor = 'white';
+        pixelBox.classList.add('pixelBox', 'box' + i);
+        pixelBox.backgroundColor = defaultColor;
     
         // hover effects
             pixelBox.addEventListener('mouseenter', () => {
@@ -74,11 +78,38 @@ slider.addEventListener('input', () => {
 
 slider.addEventListener('mouseup', () => {
     rowSize = slider.value;
-    outerContainer.innerHTML = '';
+    centerContainer.innerHTML = '';
     createPixels(rowSize * rowSize);
-})
+});
 
 // menu
+// paint brush
+const paintBrush = document.querySelector('.paintBrush');
+
+paintBrush.addEventListener('mouseenter', () => {
+    paintBrush.src = './images/paint-brush-active.png';
+});
+
+paintBrush.addEventListener('mouseleave', () => {
+    paintBrush.src = './images/paint-brush.png';
+});
+
+// Paint Bucket
+const paintBucket = document.querySelector('.paintBucket');
+
+paintBucket.addEventListener('click', () => {
+    defaultColor = pixelColor;
+    createPixels(rowSize * rowSize);
+});
+
+paintBucket.addEventListener('mouseenter', () => {
+    paintBucket.src = './images/paint-bucket-active.png';
+});
+
+paintBucket.addEventListener('mouseleave', () => {
+    paintBucket.src = './images/paint-bucket.png';
+});
+
 // dropper color picker
 const dropper = document.querySelector('.dropper');
 const colorPicker = document.querySelector('#colorPicker');
@@ -91,9 +122,58 @@ colorPicker.addEventListener('input', () => {
     pixelColor = colorPicker.value;
 });
 
+dropper.addEventListener('mouseenter', () => {
+    dropper.src = './images/dropper-active.png';
+});
+
+dropper.addEventListener('mouseleave', () => {
+    dropper.src = './images/dropper.png';
+});
+
 // eraser
 const eraser = document.querySelector('.eraser');
 
 eraser.addEventListener('click', () => {
     pixelColor = 'white';
-})
+});
+
+eraser.addEventListener('mouseenter', () => {
+    eraser.src = './images/eraser-active.png';
+});
+
+eraser.addEventListener('mouseleave', () => {
+    eraser.src = './images/eraser.png';
+});
+
+// undo
+const undo = document.querySelector('.undo');
+
+undo.addEventListener('click', () => {
+    undo = 'white';
+});
+
+undo.addEventListener('mouseenter', () => {
+    undo.src = './images/undo-active.png';
+});
+
+undo.addEventListener('mouseleave', () => {
+    undo.src = './images/undo.png';
+});
+
+// trash can
+const trash = document.querySelector('.trash');
+
+trash.addEventListener('click', () => {
+    const pixelContainer = document.querySelector('.pixelContainer');
+    pixelContainer.remove();
+    containerSize = 960;
+    createPixels(rowSize * rowSize);
+});
+
+trash.addEventListener('mouseenter', () => {
+    trash.src = './images/trash-active.png';
+});
+
+trash.addEventListener('mouseleave', () => {
+    trash.src = './images/trash.png';
+});
