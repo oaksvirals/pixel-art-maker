@@ -35,6 +35,7 @@ let pixelBoxSizing = '';
 let pixelColor = 'black';
 let defaultColor = 'white';
 let mouseDown = false;
+let rgb = false;
 
 const createPixels = (num) => {
 
@@ -77,6 +78,11 @@ const createPixels = (num) => {
                 if (mouseDown) {
                     colorSquare(pixelBox, pixelColor);
                 }
+            });
+            pixelBox.addEventListener('mousemove', () => {
+                if (rgb) {
+                    pixelColor = getRandomColor();
+                };
             });
         };
 };
@@ -234,15 +240,45 @@ hotkeys.addEventListener('mouseleave', () => {
 });
 
 // hotkey events
+const hotkeyImg = document.querySelector('.tooltip');
 // s - stroke brush
 document.addEventListener('keydown', function(event) {
     if (event.key === 's' || event.key === 'S') {
         mouseDown = true;
+        hotkeyImg.src = './images/hotkeys-active.png';
     }
+    setTimeout(() => {
+        hotkeyImg.src = './images/hotkeys.png';
+    }, 500);
 });
 // c - click brush
 document.addEventListener('keydown', function(event) {
     if (event.key === 'c' || event.key === 'C') {
         mouseDown = false;
+        hotkeyImg.src = './images/hotkeys-active.png';
     }
+    setTimeout(() => {
+        hotkeyImg.src = './images/hotkeys.png';
+    }, 500);
 });
+// r - RGB effect
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'r' || event.key === 'R') {
+        hotkeyImg.src = './images/hotkeys-active.png';
+        if (rgb === false) {
+            rgb = true;
+        } else if (rgb === true) {
+            rgb = false;
+        };
+    };
+    setTimeout(() => {
+        hotkeyImg.src = './images/hotkeys.png';
+    }, 500);
+});
+
+function getRandomColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
+};
