@@ -55,8 +55,8 @@ const createPixels = (num) => {
         pixelContainer.appendChild(pixelBox);
         pixelBox.style.width = pixelWidthHeight;
         pixelBox.style.height = pixelWidthHeight;
-        pixelBox.classList.add('pixelBox', 'box' + i);
-        pixelBox.backgroundColor = defaultColor;
+        pixelBox.className = 'pixelBox'
+        pixelBox.style.backgroundColor = defaultColor;
     
         // hover effects
             pixelBox.addEventListener('mouseenter', () => {
@@ -98,7 +98,10 @@ paintBrush.addEventListener('mouseleave', () => {
 const paintBucket = document.querySelector('.paintBucket');
 
 paintBucket.addEventListener('click', () => {
-    defaultColor = pixelColor;
+    defaultColor = colorPicker.value;
+    const pixelContainer = document.querySelector('.pixelContainer');
+    pixelContainer.remove();
+    containerSize = 960;
     createPixels(rowSize * rowSize);
 });
 
@@ -167,6 +170,7 @@ trash.addEventListener('click', () => {
     const pixelContainer = document.querySelector('.pixelContainer');
     pixelContainer.remove();
     containerSize = 960;
+    defaultColor = 'white';
     createPixels(rowSize * rowSize);
 });
 
