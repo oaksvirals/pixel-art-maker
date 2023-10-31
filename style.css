@@ -51,10 +51,15 @@
     width: 0;
     height: 0;
     position: relative;
-    right: 345px;
+    right: 435px;
     bottom: 25px;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
 
 /* pixel box area */
 .container {

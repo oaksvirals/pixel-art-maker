@@ -207,3 +207,42 @@ trash.addEventListener('mouseenter', () => {
 trash.addEventListener('mouseleave', () => {
     trash.src = './images/trash.png';
 });
+
+// hotkeys
+const hotkeys = document.querySelector('.tooltip');
+const tipText = document.querySelector('.tooltiptext');
+
+tipText.style.visibility = 'hidden';
+tipText.style.position = 'absolute';
+tipText.style.width = '250px';
+tipText.style.backgroundColor = 'black';
+tipText.style.color = 'white';
+tipText.style.textAlign = 'left';
+tipText.style.borderRadius = '6px';
+tipText.style.padding = '15px';
+tipText.style.opacity = '80%';
+tipText.style.fontSize = '18px';
+tipText.style.right = '225px';
+tipText.style.top = '10px';
+
+hotkeys.addEventListener('mouseenter', () => {
+    tipText.style.visibility = 'visible';
+});
+
+hotkeys.addEventListener('mouseleave', () => {
+    tipText.style.visibility = 'hidden';
+});
+
+// hotkey events
+// s - stroke brush
+document.addEventListener('keydown', function(event) {
+    if (event.key === 's' || event.key === 'S') {
+        mouseDown = true;
+    }
+});
+// c - click brush
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'c' || event.key === 'C') {
+        mouseDown = false;
+    }
+});
